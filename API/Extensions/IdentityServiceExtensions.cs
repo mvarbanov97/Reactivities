@@ -14,6 +14,7 @@ namespace API.Extensions
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequiredUniqueChars = 0;
+                opt.Password.RequireLowercase = false;
             })
             .AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>();
