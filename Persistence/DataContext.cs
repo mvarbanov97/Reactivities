@@ -14,11 +14,13 @@ namespace Persistence
 
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
+        public DbSet<Photo> Photos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<ActivityAttendee>(x => x.HasKey(aa => new {aa.AppUserId, aa.ActivityId}));
+            builder.Entity<ActivityAttendee>(x => x.HasKey(aa => new { aa.AppUserId, aa.ActivityId }));
 
             builder.Entity<ActivityAttendee>()
                 .HasOne(u => u.AppUser)
