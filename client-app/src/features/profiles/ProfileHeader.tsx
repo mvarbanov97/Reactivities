@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { Button, Divider, Grid, Header, Item, Reveal, Segment, Statistic } from 'semantic-ui-react';
+import { Button, Divider, Grid, Header, Image , Item, Reveal, Segment, Statistic } from 'semantic-ui-react';
 import { Profile } from '../../app/models/profile';
 
 interface Props {
@@ -14,7 +14,7 @@ export default observer(function ProfileHeader({profile}: Props) {
                 <Grid.Column width={12}>
                     <Item.Group>
                         <Item>
-                            <Item avatar size='small' src={profile.image || 'assets/user.png'} />
+                            <Image avatar size='small' src={profile.image || 'assets/user.png'} />
                             <Item.Content verticalAlign='middle'>
                                 <Header as='h1'content={profile.displayName} />
                             </Item.Content>
