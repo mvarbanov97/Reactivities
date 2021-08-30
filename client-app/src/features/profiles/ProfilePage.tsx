@@ -17,7 +17,7 @@ export default observer(function ProfilePage() {
         loadProfile(username);
     }, [loadProfile, username]);
 
-    if (!loadingProfile) return <LoadingComponent content='Loading profile...' />
+    if (loadingProfile) return <LoadingComponent content='Loading profile...' />
     return (
         <Segment width={16}>
             {profile &&
