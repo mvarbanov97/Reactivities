@@ -8,9 +8,10 @@ interface Props {
     profile: Profile;
 }
 
-export default observer(function ProfileCard({profile}: Props) {
+export default observer(function ProfileCard({ profile }: Props) {
     function truncate(str: string | undefined) {
-        if (str) {
+        if (str)
+        {
             return str.length > 40 ? str.substring(0, 37) + '...' : str;
         }
     }
@@ -24,7 +25,7 @@ export default observer(function ProfileCard({profile}: Props) {
             </Card.Content>
             <Card.Content extra>
                 <Icon name='user' />
-                20 followers
+                {profile.followersCount}
             </Card.Content>
         </Card>
     )
