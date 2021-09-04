@@ -44,7 +44,7 @@ export default class ActivityStore {
             resetPredicate();
             this.predicate.set('all', true);
             break;
-         case 'going':
+         case 'isGoing':
             resetPredicate();
             this.predicate.set('isGoing', true);
             break;
