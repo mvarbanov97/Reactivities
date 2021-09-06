@@ -45,7 +45,7 @@ namespace API
                     {
                         config.RegisterValidatorsFromAssemblyContaining<Create>();
                     });
-                    
+
             services.AddApplicationServices(_config);
             services.AddIdentityServices(_config);
         }
@@ -61,12 +61,29 @@ namespace API
             app.UseXfo(opt => opt.Deny());
             app.UseCsp(opt => opt
                 .BlockAllMixedContent()
-                .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
-                .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
+                .StyleSources(s => s.Self().CustomSources(
+                    "https://fonts.googleapis.com",
+                    "sha256-yChqzBduCCi4o4xdbXRXh4U/t1rP4UUUMJt+rB+ylUI=",
+                    "sha256-r3x6D0yBZdyG8FpooR5ZxcsLuwuJ+pSQ/80YzwXS5IU="
+
+                ))
+                .FontSources(s => s.Self().CustomSources(
+                    "https://fonts.gstatic.com",
+                    "data:"
+                ))
                 .FormActions(s => s.Self())
                 .FrameAncestors(s => s.Self())
-                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com"))
-                .ScriptSources(s => s.Self().CustomSources("sha256-G0+hZwWbZJv9BVKtl7EuGzv5PzrgkOv27uDcI4yHKPs="))
+                .ImageSources(s => s.Self().CustomSources(
+                    "https://res.cloudinary.com",
+                    "https://www.facebook.com",
+                    "https://platform-lookaside.fbsbx.com"
+                ))
+                .ScriptSources(s => s.Self().CustomSources(
+                    "sha256-G0+hZwWbZJv9BVKtl7EuGzv5PzrgkOv27uDcI4yHKPs=",
+                    "https://connect.facebook.net",
+                    "sha256-vihJD84OPlENJgwllI48/SpV1LNVWJDXRdlQB+aIm20="
+
+                ))
             );
 
             if (env.IsDevelopment())
@@ -74,15 +91,16 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-            else {
-                app.Use(async (context, next) => {
+            else
+            {
+                app.Use(async (context, next) =>
+                {
                     context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
                     await next.Invoke();
                 });
             }
 
-            // app.UseHttpsRedirection();
-
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseDefaultFiles();
