@@ -19,7 +19,7 @@ export default observer(function RegisterForm() {
                     displayName: Yup.string().required(),
                     username: Yup.string().required(),
                     email: Yup.string().required().email(),
-                    password: Yup.string().required().length(6),
+                    password: Yup.string().required(),
                 })}
         >
             {({handleSubmit, isSubmitting, errors, isValid, dirty}) => (
@@ -28,14 +28,14 @@ export default observer(function RegisterForm() {
                     <MyTextInput name='displayName' placeholder='Display Name' />
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='email' placeholder='Email' />
-                    <MyTextInput name='username' placeholder='Username' />
+                    <MyTextInput name='password' placeholder='Password' type='password' />
                     <ErrorMessage
                         name='error' 
                         render={() => 
                         <ValidationErrors errors={errors.error} />} 
                     />
                     <Button disabled={!isValid || !dirty || isSubmitting} 
-                        loading={isSubmitting} positive content='Login' type='submit' fluid 
+                        loading={isSubmitting} positive content='Register' type='submit' fluid 
                     />
                 </Form>
             )}
