@@ -24,9 +24,11 @@ namespace API.Extensions
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequiredUniqueChars = 0;
                 opt.Password.RequireLowercase = false;
+                opt.SignIn.RequireConfirmedEmail = true;
             })
             .AddEntityFrameworkStores<DataContext>()
-            .AddSignInManager<SignInManager<AppUser>>();
+            .AddSignInManager<SignInManager<AppUser>>()
+            .AddDefaultTokenProviders();
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
